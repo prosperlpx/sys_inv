@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+
+#rewriting same find_file in bash from the version of python
+
+main(){
+    #collect every argvs and pass it to the neccessiry func to continue
+    check_args "$@"
+    args_status="$?"
+    echo $args_status
+
+    #using the status code saved from the previous command, run the next instruction
+    if [ $args_status -eq 1 ]; then
+        printf "Just one dir argument needed: Err %s\n" "$args_status"
+        exit "$?"
+    fi
+
+    run_file #no errors from then execute this fnc
+}
+
+check_args(){
+    #checks the argvs passed return a number which tells what exit code it is and the main argvs we need if true
+    if [ "$#" -ne 1 ]; then
+        return 1
+    fi
+}
+
+run_file(){
+    #this is responsible for the other executioin of this program 
+    echo "running..."
+}
+
+main "$@"
